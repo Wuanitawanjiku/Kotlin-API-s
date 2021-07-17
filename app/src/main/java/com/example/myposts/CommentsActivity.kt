@@ -40,7 +40,7 @@ class CommentsActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     var post = response.body()!!
                     tvPostTitle.text = post.title
-                    tvPostBody.text = post.title
+                    tvPostBody.text = post.body
                 }
             }
 

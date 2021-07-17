@@ -18,16 +18,14 @@ class MyPosts(var context: Context, var userList: List<Post>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-//        var currentPosts = userList.get(position)
-//        holder.tvUserId.text = currentPosts.userId.toString()
-//        holder.tvId.text = currentPosts.id.toString()
-        holder.tvUserId.text = userList[position].userId.toString()
-        holder.tvId.text = userList[position].id.toString()
-        holder.tvTitle.text = userList[position].title
-        holder.tvBody.text = userList[position].body
+        var currentPosts = userList.get(position)
+        holder.tvUserId.text = currentPosts.userId.toString()
+        holder.tvId.text = currentPosts.id.toString()
+        holder.tvTitle.text = currentPosts.title
+        holder.tvBody.text = currentPosts.body
         holder.cvPosts.setOnClickListener {
             var intent = Intent(context, CommentsActivity::class.java)
-            intent.putExtra("POST_ID",holder.tvId.id)
+            intent.putExtra("POST_ID", currentPosts.id)
             context.startActivity(intent)
         }
     }
