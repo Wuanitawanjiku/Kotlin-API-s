@@ -1,12 +1,15 @@
 package com.example.myposts
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.http.POST
 
 class MyPosts(var context: Context, var userList: List<Post>): RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -15,11 +18,18 @@ class MyPosts(var context: Context, var userList: List<Post>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
+//        var currentPosts = userList.get(position)
+//        holder.tvUserId.text = currentPosts.userId.toString()
+//        holder.tvId.text = currentPosts.id.toString()
         holder.tvUserId.text = userList[position].userId.toString()
         holder.tvId.text = userList[position].id.toString()
         holder.tvTitle.text = userList[position].title
         holder.tvBody.text = userList[position].body
-
+        holder.cvPosts.setOnClickListener {
+            var intent = Intent(context, CommentsActivity::class.java)
+            intent.putExtra("POST_ID",holder.tvId.id)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -33,4 +43,5 @@ class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     var tvId = itemView.findViewById<TextView>(R.id.tvId)
     var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
     var tvBody = itemView.findViewById<TextView>(R.id.tvBody)
+    var cvPosts = itemView.findViewById<CardView>(R.id.cvPosts)
 }
