@@ -38,10 +38,9 @@ class CommentsActivity : AppCompatActivity() {
         request.enqueue(object : Callback<Post> {
             override fun onResponse(call: Call<Post>, response: Response<Post>) {
                 if (response.isSuccessful) {
-                    var post = response.body()
-                    tvPostTitle.text = post!!.title
-                    tvPostBody.text = post!!.title.toString()
-
+                    var post = response.body()!!
+                    tvPostTitle.text = post.title
+                    tvPostBody.text = post.title
                 }
             }
 
