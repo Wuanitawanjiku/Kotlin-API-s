@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         val retrofit = ApiClient.buildApiClient(ApiInterface::class.java)
         val request = retrofit.getPosts()
         request.enqueue(object : Callback, retrofit2.Callback<List<Post>> {
-
             override fun onResponse(call: Call<List<Post>?>, response: Response<List<Post>?>) {
                 if (response.isSuccessful) {
 //                    rvPosts.findViewById<RecyclerView>(R.id.rvPosts)
@@ -29,12 +28,9 @@ class MainActivity : AppCompatActivity() {
                     var myAdapter = MyPosts(baseContext, posts)
                     rvPosts.adapter = myAdapter
                     rvPosts.layoutManager = LinearLayoutManager(baseContext)
-
-
 //                    Toast.makeText(baseContext, "${posts!!.size} posts", Toast.LENGTH_LONG).show()
                 }
             }
-
             override fun onFailure(call: Call<List<Post>?>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
             }

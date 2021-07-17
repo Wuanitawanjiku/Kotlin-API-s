@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import retrofit2.http.POST
 
 class MyPosts(var context: Context, var userList: List<Post>): RecyclerView.Adapter<PostViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -26,6 +24,7 @@ class MyPosts(var context: Context, var userList: List<Post>): RecyclerView.Adap
         holder.cvPosts.setOnClickListener {
             var intent = Intent(context, CommentsActivity::class.java)
             intent.putExtra("POST_ID", currentPosts.id)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
     }
